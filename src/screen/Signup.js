@@ -34,7 +34,7 @@ const Signup = props => {
   // // console.log(userName);
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
-  const [confPassword1, setconfPassword1] = useState('');
+  // const [confPassword1, setconfPassword1] = useState('');
 
   // const [fieldPwd, setFieldPwd] = useState(false);
   // const [fieldPwd1, setfieldPwd1] = useState(false);
@@ -59,6 +59,7 @@ const Signup = props => {
     // console.log(errors, "<><");
     setValues(value => {
       let newValue = {...value};
+
       if (key === 'userName') {
         newValue.userName = mValue;
       } else if (key === 'email') {
@@ -136,10 +137,12 @@ const Signup = props => {
   };
 
   const iconPress = () => {
-    setPassVisible1(!passVisible1);
+    setPassVisible(!passVisible);
   };
 
-  // const on = handleChangeText('password', value);
+  const iconPress1 = () => {
+    setPassVisible1(!passVisible1);
+  };
 
   return (
     <ScrollView>
@@ -152,39 +155,44 @@ const Signup = props => {
               Products!
             </Text>
           </View>
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Full Name</Text>
-            <TextInput
-              style={styles.inputStyle}
-              autoCapitalize="none"
-              autoCorrect={false}
-              name="userName"
-              value={values.userName}
-              error={errors.userName}
-              onChangeText={value => {
-                handleChangeText('userName', value);
-              }}
-            />
-            {/* {errors.userName ? <Text styles ={styles.errorText}>{errors}</Text>: null} */}
-          </View>
+          <TextField
+            title="Full Name"
+            name="userName"
+            autoCapitalize="none"
+            autoCorrect={false}
+            value={values.userName}
+            error={errors.userName}
+            onChangeText={val => {
+              handleChangeText('userName', val);
+            }}
+            isIcon={false}
+            // iconName1={'visibility'}
+            // iconName2={'visibility-off'}
+            // isIconVisible={passVisible}
+            // iconPress={iconPress}
+          />
           <View style={styles.invalidField}>
             {errors.userName ? (
               <Text style={styles.invalidTxt}>{errors.userName}</Text>
             ) : null}
           </View>
 
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Email Address</Text>
-            <TextInput
-              style={styles.inputStyle}
-              autoCapitalize="none"
-              autoCorrect={false}
-              keyboardType="email-address"
-              value={values.email}
-              error={errors.email}
-              onChangeText={value => handleChangeText('email', value)}
-            />
-          </View>
+          <TextField
+            title="Email Address"
+            name="email"
+            keyboardType="email-address"
+            autoCorrect={false}
+            value={values.email}
+            error={errors.email}
+            onChangeText={val => {
+              handleChangeText('email', val);
+            }}
+            isIcon={false}
+            // iconName1={'visibility'}
+            // iconName2={'visibility-off'}
+            // isIconVisible={passVisible}
+            // iconPress={iconPress}
+          />
           <View style={styles.invalidField}>
             {errors.email ? (
               <Text style={styles.invalidTxt}>{errors.email}</Text>
@@ -194,17 +202,19 @@ const Signup = props => {
           <TextField
             title="Password"
             name="password"
+            placeholder="Enter Password"
             secureTextEntry={passVisible}
             value={values.password}
             error={errors.password}
-            onChangeText={value => onChange(value)}
+            onChangeText={val => {
+              handleChangeText('password', val);
+            }}
             isIcon={true}
             iconName1={'visibility'}
             iconName2={'visibility-off'}
-            isIconVisible={passVisible1}
+            isIconVisible={passVisible}
             iconPress={iconPress}
           />
-
           <View style={styles.invalidField}>
             {errors.password ? (
               <Text style={styles.invalidTxt}>{errors.password}</Text>
@@ -214,6 +224,7 @@ const Signup = props => {
           <TextField
             title="Confirm Password"
             name="confPassword"
+            placeholder="Re-enter Password"
             secureTextEntry={passVisible1}
             value={values.confPassword}
             error={errors.confPassword}
@@ -221,14 +232,15 @@ const Signup = props => {
             iconName1={'visibility'}
             iconName2={'visibility-off'}
             isIconVisible={passVisible1}
-            iconPress={iconPress}
-            OnChangeText={val => handleChangeText('confPassword', val)}
+            iconPress={iconPress1}
+            onChangeText={val => {
+              handleChangeText('confPassword', val);
+            }}
           />
-
           {/* <View style={styles.inputContainer}>
             <Text style={styles.label}>Confirm Password</Text>
             <View style={styles.inputContainerPwd}>
-              <TextField
+              <TextInput
                 secureTextEntry={passVisible1}
                 value={values.confPassword}
                 error={errors.confPassword}
@@ -240,7 +252,6 @@ const Signup = props => {
                 onPress={() => setPassVisible1(!passVisible1)}></Icon>
             </View>
           </View> */}
-
           <View style={styles.textInputField}>
             <View style={styles.checkboxContainer}>
               <CheckBox
@@ -263,7 +274,6 @@ const Signup = props => {
               (link to PP)
             </Text>
           </View>
-
           <View style={styles.buttonContainer}>
             <Button
               submitForm={submitForm}
