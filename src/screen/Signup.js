@@ -156,7 +156,7 @@ const Signup = props => {
             </Text>
           </View>
           <TextField
-            title="Full Name"
+            title="Full Name new"
             name="userName"
             autoCapitalize="none"
             autoCorrect={false}
