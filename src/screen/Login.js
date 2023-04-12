@@ -89,7 +89,24 @@ const Login = props => {
           </Text>
         </View>
 
-        <View style={styles.inputContainer}>
+        <TextField
+          title="Email Address"
+          name="email"
+          keyboardType="email-address"
+          autoCorrect={false}
+          value={values.email}
+          error={errors.email}
+          onChangeText={val => {
+            handleChangeText('email', val);
+          }}
+          isIcon={false}
+          // iconName1={'visibility'}
+          // iconName2={'visibility-off'}
+          // isIconVisible={passVisible}
+          // iconPress={iconPress}
+        />
+
+        {/* <View style={styles.inputContainer}>
           <Text style={styles.label}>Email</Text>
           <TextInput
             style={styles.inputStyle}
@@ -100,7 +117,7 @@ const Login = props => {
             error={errors.email}
             onChangeText={value => handleChangeText('email', value)}
           />
-        </View>
+        </View> */}
         <View style={styles.invalidField}>
           {errors.email ? (
             <Text style={styles.invalidTxt}>{errors.email}</Text>
